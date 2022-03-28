@@ -15,7 +15,7 @@
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("console.log(\"Webpack is working\");\nconst MovingObject = __webpack_require__(/*! ./moving_object.js */ \"./src/moving_object.js\");\n\nconst movingObject = new MovingObject(\n  [30, 30],\n  [10, 10],\n  5,\n  \"#00FF00\"\n);\n\nwindow.MovingObject = movingObject;\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("window.addEventListener('DOMContentLoaded', (event) => {\n  console.log('DOM fully loaded and parsed');\n  const canvasEl = document.getElementById('game-canvas');\n  const ctx = canvasEl.getContext('2d');\n\n  canvasEl.width = 600;\n  canvasEl.height = 800;\n  ctx.fillStyle = 'black';\n  ctx.fillRect(0,0,600, 800);\n\n  movingObject.draw(ctx);\n  movingObject.move();\n  movingObject.draw(ctx);\n\n});\n\n\nconsole.log(\"Webpack is working\");\nconst MovingObject = __webpack_require__(/*! ./moving_object.js */ \"./src/moving_object.js\");\n\nconst movingObject = new MovingObject(\n  [300, 400],\n  [10, 10],\n  30,\n  \"#00FF00\"\n);\n\n\n\nwindow.MovingObject = movingObject;\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
@@ -25,7 +25,7 @@ eval("console.log(\"Webpack is working\");\nconst MovingObject = __webpack_requi
   \******************************/
 /***/ ((module) => {
 
-eval("function MovingObject(pos, vel, radius, color){\n  this.pos = pos;\n  this.vel = vel;\n  this.radius = radius;\n  this.color = color;\n}\n\nMovingObject.prototype.draw = function(ctx){\n  ctx.beginPath();\n  ctx.arc();\n};\n\nmodule.exports = MovingObject;\n\n//# sourceURL=webpack:///./src/moving_object.js?");
+eval("function MovingObject(pos, vel, radius, color){\n  this.pos = pos;\n  this.vel = vel;\n  this.radius = radius;\n  this.color = color;\n}\n\nMovingObject.prototype.draw = function(ctx){\n  ctx.beginPath();\n  ctx.arc(\n    this.pos[0],\n    this.pos[1],\n    this.radius,\n    0,\n    2 * Math.PI\n    );\n  ctx.strokeStyle = 'white';\n  ctx.fillStyle = 'gray';\n  ctx.lineWidth = 1;\n  ctx.fill();\n  ctx.stroke();\n};\n\nMovingObject.prototype.move = function(){\n  let x = this.pos[0] + this.vel[0];\n  let y = this.pos[1] + this.vel[1];\n\n  this.pos = [x, y];\n};\n\nmodule.exports = MovingObject;\n\n//# sourceURL=webpack:///./src/moving_object.js?");
 
 /***/ })
 
