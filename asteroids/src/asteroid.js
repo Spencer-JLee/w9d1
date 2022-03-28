@@ -5,6 +5,14 @@ Util.inherits(Asteroid, MovingObject);
 const RADIUS = 20;
 const COLOR = "gray";
 
-function Asteroid(pos){
-  MovingObject.call(this, pos, Util.randomVec(Math.random()) );
+function Asteroid(pos, game){
+  MovingObject.call(this, 
+    pos, 
+    Util.randomVec(Math.floor(Math.random() * 10) + 1),
+    RADIUS,
+    COLOR,
+    game
+  );
 }
+
+module.exports = Asteroid;

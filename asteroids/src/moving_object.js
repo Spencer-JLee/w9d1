@@ -1,8 +1,9 @@
-function MovingObject(pos, vel, radius, color){
+function MovingObject(pos, vel, radius, color, game){
   this.pos = pos;
   this.vel = vel;
   this.radius = radius;
   this.color = color;
+  this.game = game;
 }
 
 MovingObject.prototype.draw = function(ctx){
@@ -25,7 +26,18 @@ MovingObject.prototype.move = function(){
   let x = this.pos[0] + this.vel[0];
   let y = this.pos[1] + this.vel[1];
 
-  this.pos = [x, y];
+  this.pos = this.game.wrap([x, y]);
+};
+
+MovingObject.prototype.isCollidedWith = function(otherObject){
+  let x_diff = otherObject.pos[0] - this.pos[0];
+  let y_diff = otherObject.pos[1] - this.pos[1];
+  
+  let dist = Math.sqrt(Math.pow(x_diff, 2) + Math.pow(y_diff, 2));
+  let radiiSum = this.radius + otherObject.radius;
+
+  return dist <= radiiSum;
+
 };
 
 module.exports = MovingObject;

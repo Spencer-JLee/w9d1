@@ -8,15 +8,22 @@ window.addEventListener('DOMContentLoaded', (event) => {
   ctx.fillStyle = 'black';
   ctx.fillRect(0,0,600, 800);
 
-  movingObject.draw(ctx);
-  movingObject.move();
-  movingObject.draw(ctx);
+  // movingObject.draw(ctx);
+  // movingObject.move();
+  // movingObject.draw(ctx);
+
+  // asteroid1.draw(ctx);
+
+  const gameView = new GameView(ctx);
+  gameView.start();
 
 });
 
 
 console.log("Webpack is working");
 const MovingObject = require("./moving_object.js");
+const Asteroid = require("./asteroid.js");
+const GameView = require("./game_view.js");
 
 const movingObject = new MovingObject(
   [300, 400],
@@ -24,6 +31,8 @@ const movingObject = new MovingObject(
   30,
   "#00FF00"
 );
+
+const asteroid1 = new Asteroid([60, 500]);
 
 
 
